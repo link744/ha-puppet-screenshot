@@ -1,0 +1,16 @@
+services:
+  ha-puppet:
+    build: .
+    container_name: ha-puppet
+    restart: unless-stopped
+    ports:
+      - "10000:10000"
+    environment:
+      - ACCESS_TOKEN=your_long_lived_access_token_here
+      - HOME_ASSISTANT_URL=http://homeassistant:8123
+      # Optional: Explicitly define chromium path
+      # - CHROMIUM_EXECUTABLE=/usr/bin/chromium
+      # Optional: Set to true if UI updates inconsistently
+      # - KEEP_BROWSER_OPEN=true
+      # Optional: Enable debugging output
+      # - DEBUG=true
