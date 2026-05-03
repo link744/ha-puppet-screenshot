@@ -89,19 +89,20 @@ cd ..
 nano docker-compose.yml
 ```
 
-Replace the contents of `docker-compose.yml` with the following:
+Replace the contents of `docker-compose.yml` with the following under "services" heading:
 
 ```yaml
-services:
-  ha-puppet:
-    build: .
-    container_name: ha-puppet
+  puppet:
+    build:
+      context: ./home-assistant-addons/puppet   # <-- adjust to your clone location
+      dockerfile: Dockerfile
+    container_name: puppet
     restart: unless-stopped
     ports:
       - "10000:10000"
     volumes:
       # Mount options-dev.json directly into the container's working directory
-      - ./ha-puppet/options-dev.json:/app/options-dev.json:ro
+      - ./home-assistant-addons/puppet/ha-puppet/options-dev.json:/app/options-dev.json:ro
     environment:
       # Optional: Explicitly define chromium path
       - CHROMIUM_EXECUTABLE=/usr/bin/chromium
@@ -109,6 +110,7 @@ services:
       # - KEEP_BROWSER_OPEN=true
       # Optional: Enable debugging output
       # - DEBUG=true
+
 ```
 
 *(Note: We removed the `ACCESS_TOKEN` and `HOME_ASSISTANT_URL` environment variables because they are now safely loaded from your `options-dev.json` file!)*
@@ -128,7 +130,7 @@ Docker will download the necessary base images, install Chromium and Node.js *in
 You can check the logs to ensure it started successfully and connected to Home Assistant:
 
 ```bash
-sudo docker compose logs -f ha-puppet
+sudo docker compose logs -f puppet
 ```
 
 You should see output indicating that the server is running and listening on port 10000. 
