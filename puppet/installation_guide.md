@@ -17,11 +17,11 @@ sudo apt-get update
 # Install Git
 sudo apt-get install -y git
 
-# Install Docker
+# Install Docker (you probably did tthis already tho)
 curl -fsSL https://get.docker.com -o get-docker.sh
 sudo sh get-docker.sh
 
-# Install Docker Compose Plugin
+# Install Docker Compose Plugin (you prob did this already tho)
 sudo apt-get install -y docker-compose-plugin
 ```
 
@@ -42,6 +42,9 @@ cd ~
 git clone https://github.com/link744/home-assistant-addons.git
 cd home-assistant-addons/puppet
 ```
+
+For example, you could put the install directory so it looks like:
+/home/link744/home-assistant-addons/puppet/ha-puppet
 
 ### Step 3: Create and Edit `options-dev.json`
 
